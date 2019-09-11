@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/question_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="24dp"
+        android:textSize="25dp"
+        tools:text="@string/question_australia" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/true_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/true_button" /> //true button
+
+        <Button
+            android:id="@+id/false_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/false_button"/> //false button
+
+    </LinearLayout> <!-- linearlayout inner-->
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_button"
+        android:drawableEnd="@drawable/arrow_right"/>
+
+    <TextView
+        android:id="@+id/correct_count"
+        android:layout_width="220dp"
+        android:layout_height="120dp"
+        android:paddingTop="90dp"
+        android:textColor="#008000"
+        android:textSize="20dp"
+        android:text="@string/correct_count" />
+
+    <TextView
+        android:id="@+id/incorrect_count"
+        android:layout_width="220dp"
+        android:layout_y="100px"
+        android:layout_height="80dp"
+        android:paddingTop="50dp"
+        android:textColor="#ff0000"
+        android:textSize="20dp"
+        android:text="@string/incorrect_count" />
+
+</LinearLayout> <!-- linearlayout outer-->
+
+
+<!-- android:layout_height="wrap_content" -->
+    <!--android:layout_gravity="clip_horizontal"
+            android:paddingLeft="20dp"-->
