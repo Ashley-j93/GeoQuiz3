@@ -1,9 +1,12 @@
 package com.bignerdranch.andriod.geoquiz
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Surface
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         nextButton = findViewById(R.id.next_button) //new
         questionTextView = findViewById(R.id.question_text_view) //new
 
+        declareOrientation(this)//added
         trueButton.setOnClickListener{ view: View ->
             if( click == false) {
                 click = true
@@ -124,4 +128,15 @@ class MainActivity : AppCompatActivity() {
         val incorrect_count_display: TextView = findViewById(R.id.incorrect_count)
         incorrect_count_display.text = "incorrect count # " + quizViewModel.incorrect.toString() // cannot add strings together within setText
     }
+
+    private fun declareOrientation(context: Context) {
+        val orientation = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getOrientation()
+        val messageResId = if ((orientation == Surface.ROTATION_0) or (orientation == Surface.ROTATION_180)) {
+            R.string.portrait_orientation
+        } else {
+            R.string.landscape_orientation
+        }
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
+    }
+
 }// class main activity
