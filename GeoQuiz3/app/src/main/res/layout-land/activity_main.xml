@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#B6D9D1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -11,10 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+
         android:paddingTop="90dp"
 
 
         android:textSize="25dp"
+        android:textColor="#003327"
         tools:text="@string/question_australia" />
 
     <LinearLayout
@@ -26,13 +29,13 @@
             android:id="@+id/true_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/true_button" /> //true button
+            android:text="@string/true_button" /> <!-- true button-->
 
         <Button
             android:id="@+id/false_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/false_button"/> //false button
+            android:text="@string/false_button"/> <!-- false button-->
 
 
         <Button
@@ -62,6 +65,7 @@
             android:id="@+id/correct_count"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ECD9D9"
             android:paddingRight="90dp"
             android:paddingLeft="30dp"
             android:textColor="#008000"
@@ -72,6 +76,7 @@
             android:id="@+id/incorrect_count"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#ECD9D9"
             android:paddingRight="90dp"
             android:paddingLeft="30dp"
             android:textColor="#ff0000"
