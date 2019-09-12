@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 
 private const val TAG = "MainActivity" //added
 
@@ -17,13 +18,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: Button
     private lateinit var questionTextView: TextView //alt enter for adding resource/import info
 
-    private val questionBank = listOf(
-        Question(R.string.question_australia, true),
-        Question(R.string.question_oceans, true),
-        Question(R.string.question_mideast, false),
-        Question(R.string.question_africa, false),
-        Question(R.string.question_americas, true),
-        Question(R.string.question_asia, true))
+    private val quizViewModel: QuizViewModel by lazy {
+        ViewModelProviders.of(this).get(QuizViewModel::class.java)
+    }
 
     private var currentIndex = 0
     private var correct_c = 0
@@ -58,10 +55,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            currentIndex = (currentIndex +1) % questionBank.size
+            quizViewModel.moveToNext()
             updateQuestion()
         }
         updateQuestion()
+        updateCorrectDisplay()
+        updateIncorrectDisplay()
+
     }//override
 
 
@@ -91,31 +91,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateQuestion(){
-        val questionTextResId = questionBank[currentIndex].textResId
+        val questionTextResId = quizViewModel.currentQuestionText
         questionTextView.setText(questionTextResId)
         click = false // a new question has appeared, this allows user to answer a new question
     }
 
     private fun checkAnswer(userAnswer: Boolean){
-        val correctAnswer = questionBank[currentIndex].answer
+        val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId = if (userAnswer == correctAnswer){
             R.string.correct_toast
         } else {
             R.string.incorrect_toast
         }
         if (userAnswer == correctAnswer){
-            correct_c +=  1
-            val correct_count_display: TextView = findViewById(R.id.correct_count)
-            val disp = "correct count # " + correct_c.toString() // cannot add strings together within setText
-            correct_count_display.text = disp
+            quizViewModel.updateCorrect()
+            updateCorrectDisplay()
         } else {
-            incorrect_c += 1
-            val incorrect_count_display: TextView = findViewById(R.id.incorrect_count)
-            val disp = "incorrect count # " + incorrect_c.toString() // cannot add strings together within setText
-            incorrect_count_display.text = disp
+            quizViewModel.updateIncorrect()
+            updateIncorrectDisplay()
         }
 
         Toast.makeText(this,messageResId, Toast.LENGTH_SHORT)
             .show()
     }// fun checkAnswer
+
+    private fun updateCorrectDisplay(){
+        val correct_count_display: TextView = findViewById(R.id.correct_count)
+        correct_count_display.text = "correct count # " + quizViewModel.correct.toString() // cannot add strings together within setText
+    }
+
+    private fun updateIncorrectDisplay(){
+        val incorrect_count_display: TextView = findViewById(R.id.incorrect_count)
+        incorrect_count_display.text = "incorrect count # " + quizViewModel.incorrect.toString() // cannot add strings together within setText
+    }
 }// class main activity
